@@ -15,8 +15,9 @@ export const createWordCloudAsync = createAsyncThunk(
   'main/createWordCloud',
   async (url) => {
     const response = await createWordCloud(url);
+    const data = await response.text()
     // The value we return becomes the `fulfilled` action payload
-    return response.data;
+    return data;
   }
 );
 
@@ -37,10 +38,12 @@ export const mainSlice = createSlice({
       .addCase(createWordCloudAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.wordCloud = action.payload;
+        console.log('action.payload :>> ', action.payload);
       })
-      .addCase(createWordCloudAsync.rejected,(state)=>{
+      .addCase(createWordCloudAsync.rejected,(state,action)=>{
         state.status="idle";
         state.wordCloud = 0;
+        console.error('Error in createWordCloudAsync:', action.error.message);
       })
   },
 });

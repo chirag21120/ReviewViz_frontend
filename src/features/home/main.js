@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { TextInput, Button } from "flowbite-react";
+import { useDispatch } from "react-redux";
+import { createWordCloudAsync } from "./mainSlice";
+import { useNavigate } from "react-router-dom";
 const Main = () => {
   const [url, setUrl] = useState("");
   const [link,setLink] = useState(false);
@@ -7,10 +10,17 @@ const Main = () => {
     setLink(isAmazonProductLink(e.target.value));
     setUrl(e.target.value);
   };
-
-  const handleSubmit = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleSubmit = async () => {
     // TODO: Submit the URL to your backend server for processing
-    console.log(url);
+    await dispatch(createWordCloudAsync(url));
+
+      // Navigation logic after the dispatch is successful
+      navigate('/review');
+    // {<Navigate to='/review' replace = {true}></Navigate>}
+    // console.log(url);
+
   };
 
   const isAmazonProductLink = (url)=> {

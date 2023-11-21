@@ -1,14 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import { BrowserRouter as Router, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
+import Review from './pages/Review';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element:(
+      <Home></Home>
+    ),
+  },{
+    path:'/review',
+    element:(
+      <Review></Review>
+    )
+  }
+])
 
 function App() {
   return (
-    <>
-    <Home></Home>
-    </>
+    <div className='App'>
+      <RouterProvider router={router}></RouterProvider>
+    </div>
   );
 }
 
