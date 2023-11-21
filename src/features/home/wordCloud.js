@@ -8,7 +8,7 @@ const WordCloud = () => {
     // const imageData = await response.arrayBuffer();
     setImageSrc(response)
   }
-    useEffect(()=>{fetchImage()},[selectWordCloud])
+    useEffect(()=>{fetchImage()},[fetchImage])
   return (
     <div
       className="bg-cover"
@@ -18,7 +18,7 @@ const WordCloud = () => {
       }}
     >
       <div className="container flex flex-col items-center">
-       <img className="my-8" src={imageSrc} alt="Fetched Image"></img>
+       <img className="my-8" src={imageSrc} alt="Fetched"></img>
       </div>
     </div>
   );
