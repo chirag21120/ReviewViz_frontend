@@ -34,7 +34,7 @@ export const mainSlice = createSlice({
       .addCase(createWordCloudAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(createWordCloud.fulfilled, (state, action) => {
+      .addCase(createWordCloudAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.wordCloud = action.payload;
       })
