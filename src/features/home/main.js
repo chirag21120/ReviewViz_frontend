@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { TextInput, Button } from "flowbite-react";
-import { useDispatch } from "react-redux";
-import { createWordCloudAsync } from "./mainSlice";
+import { TextInput, Button, Spinner } from "flowbite-react";
+import { useDispatch, useSelector } from "react-redux";
+import { createWordCloudAsync, selectStatus } from "./mainSlice";
 import { useNavigate } from "react-router-dom";
 const Main = () => {
   const [url, setUrl] = useState("");
   const [link,setLink] = useState(false);
+  const staus = useSelector(selectStatus);
   const handleChange = (e) => {
     setLink(isAmazonProductLink(e.target.value));
     setUrl(e.target.value);
@@ -39,7 +40,7 @@ const Main = () => {
         height: "100vh",
       }}
     >
-      <div className="container flex flex-col items-center">
+      {staus==='idle'?<div className="container flex flex-col items-center">
         <div className="my-8 p-8 text-5xl text-white font-bold tracking-wide">
           <h1>Please Provide the Product Link</h1>
         </div>
@@ -63,7 +64,14 @@ const Main = () => {
         Generate Image
       </Button>}
         </div>
-      </div>
+      </div>:<div className="flex flex-wrap items-center gap-2">
+      <div className="my-8 p-8 text-5xl text-white font-bold tracking-wide">
+          <h1>We are Genrating your word cloud</h1>
+        </div>
+        <div className="my-8 p-8 text-xl text-white font-bold ">
+        <Spinner color="success" aria-label="Extra large spinner example" size="xl" />
+        </div>
+      </div>}
     </div>
   );
 };

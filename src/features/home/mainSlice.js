@@ -53,5 +53,6 @@ export const mainSlice = createSlice({
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectWordCloud = (state) => state.main.wordCloud;
+export const selectStatus = (state) => state.main.status;
 
 export default mainSlice.reducer;
